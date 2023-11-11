@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import NeedHelp from "./NeedHelp";
 import Page3 from "./page3";
-import Page2 from "./page2";
+import Events from "./Events";
 import {Container, Nav, Navbar} from "react-bootstrap";
 import logo from './logo.png'
 
@@ -26,7 +26,7 @@ class Header extends Component {
                             <Nav className='mr-auto'>
                                 <Nav.Link href='/'> Главная </Nav.Link>
                                 <Nav.Link href='/need_help'> Нужна помощь? </Nav.Link>
-                                <Nav.Link href='/page2'> page2 </Nav.Link>
+                                <Nav.Link href='/events'> Карта событий </Nav.Link>
                                 <Nav.Link href='/page3'> page3 </Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
@@ -35,7 +35,7 @@ class Header extends Component {
                 <Routes>
                     <Route exact path="/" element={<h1>Home Page</h1>}/>
                     <Route exact path="need_help" element={<NeedHelp/>}/>
-                    <Route exact path="page2" element={<Page2/>}/>
+                    <Route exact path="events" element={<Events/>}/>
                     <Route exact path="page3" element={<Page3/>}/>
                 </Routes>
             </Router>

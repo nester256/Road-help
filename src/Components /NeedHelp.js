@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {MapContainer, TileLayer, Marker, Popup, useMapEvents} from 'react-leaflet';
-import {Form, FormControl} from 'react-bootstrap';
-import {Button} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { Form, FormControl } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import './needhelp_styles.css';
 import u_here from './u_here.png';
 import L from 'leaflet';
 
-function EventMapListener({onLocationFound}) {
+function EventMapListener({ onLocationFound }) {
     const map = useMapEvents({
         click: (location) => {
             onLocationFound(location.latlng);
@@ -24,7 +25,7 @@ export default function NeedHelp() {
         name: '',
         phone: '',
         transportType: 'Грузовой транспорт',
-        severity: 'color-blue', // Или другой цвет по умолчанию
+        severity: 'color-blue',
         description: '',
     });
 
@@ -33,9 +34,9 @@ export default function NeedHelp() {
             try {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        const {latitude, longitude} = position.coords;
-                        setUserLocation({lat: latitude, lng: longitude});
-                        setMarkerPosition({lat: latitude, lng: longitude});
+                        const { latitude, longitude } = position.coords;
+                        setUserLocation({ lat: latitude, lng: longitude });
+                        setMarkerPosition({ lat: latitude, lng: longitude });
                         setLocationRequested(true);
                     },
                     (error) => {
@@ -63,29 +64,61 @@ export default function NeedHelp() {
     };
 
     const handleInputChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Создайте объект JSON из данных маркера и полей ввода
         const jsonData = {
             markerPosition,
             formData,
         };
-        console.log('JSON data:', jsonData);
+
+        // Получите текущие события из локального хранилища (если они есть)
+        const existingEvents = JSON.parse(localStorage.getItem('events')) || {};
+
+        // Обновите текущие события новыми данными
+        const updatedEvents = {
+            ...existingEvents,
+            events: {
+                ...existingEvents.events,
+                [Date.now()]: jsonData, // Используйте метку времени как уникальный идентификатор
+            },
+        };
+
+        // Сохраните обновленные события в локальное хранилище
+        localStorage.setItem('events', JSON.stringify(updatedEvents));
+
+        // Очистите форму или выполните другие действия после успешной отправки
+        setMarkerPosition(null);
+        setFormData({
+            name: '',
+            phone: '',
+            transportType: 'Грузовой транспорт',
+            severity: 'color-blue',
+            description: '',
+        });
+
+        // Переход на другую страницу после успешной отправки
+        navigate('/events');
+
+        // Проверьте, что данные успешно сохранены
+        console.log('Updated Events:', updatedEvents);
     };
 
     return (
         <div>
             <div>
-                <MapContainer center={userLocation || [43.4040000, 39.9540000]} zoom={13}
-                              style={{width: '100%', height: '400px'}}>
-                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'/>
+                <MapContainer center={userLocation || [43.4040000, 39.9540000]} zoom={13} style={{ width: '100%', height: '400px' }}>
+                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
 
                     {markerPosition && (
                         <Marker position={markerPosition} icon={u_here_f}>
@@ -95,7 +128,7 @@ export default function NeedHelp() {
                         </Marker>
                     )}
 
-                    <EventMapListener onLocationFound={handleLocationFound}/>
+                    <EventMapListener onLocationFound={handleLocationFound} />
                 </MapContainer>
             </div>
             <div>
@@ -108,22 +141,19 @@ export default function NeedHelp() {
                 {/* Ввод имени */}
                 <Form.Group controlId="exampleForm.ControlName">
                     <Form.Label>Ваше имя</Form.Label>
-                    <FormControl type="text" placeholder="Введите ваше имя" name="name" value={formData.name}
-                                 onChange={handleInputChange}/>
+                    <FormControl type="text" placeholder="Введите ваше имя" name="name" value={formData.name} onChange={handleInputChange} />
                 </Form.Group>
 
                 {/* Ввод Номера телефона */}
                 <Form.Group controlId="exampleForm.ControlPhone">
                     <Form.Label>Номер телефона</Form.Label>
-                    <FormControl type="tel" placeholder="Введите номер телефона" name="phone" value={formData.phone}
-                                 onChange={handleInputChange}/>
+                    <FormControl type="tel" placeholder="Введите номер телефона" name="phone" value={formData.phone} onChange={handleInputChange} />
                 </Form.Group>
 
                 {/* Ввод Транспортного средства */}
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label>Выберите тип транспорта</Form.Label>
-                    <FormControl as="select" className="custom-select" name="transportType"
-                                 value={formData.transportType} onChange={handleInputChange}>
+                    <FormControl as="select" className="custom-select" name="transportType" value={formData.transportType} onChange={handleInputChange}>
                         <option>Грузовой транспорт</option>
                         <option>Легковой транспорт</option>
                         <option>Мото транспорт</option>
