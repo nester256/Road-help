@@ -20,7 +20,6 @@
     background-color: #e74c3c;
 }
 
-/* Стили для подсветки при выборе */
 .radio-circle input:checked + label::before {
     content: '';
     display: block;
