@@ -1,0 +1,35 @@
+.radio-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: inline-block;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.radio-blue {
+    background-color: #3498db;
+}
+
+.radio-green {
+    background-color: #2ecc71;
+}
+
+.radio-red {
+    background-color: #e74c3c;
+}
+
+/* Стили для подсветки при выборе */
+.radio-circle input:checked + label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

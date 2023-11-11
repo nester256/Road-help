@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import { Form, FormControl } from 'react-bootstrap';
 import 'leaflet/dist/leaflet.css';
 import { Button } from "react-bootstrap";
+import './needhelp_styles.css'; // Имя файла стилей
 
 function EventMapListner({ onLocationFound }) {
     const map = useMapEvents({
@@ -57,6 +58,32 @@ export default function NeedHelp() {
                         <option>Легковой транспорт</option>
                         <option>Мото транспорт</option>
                     </FormControl>
+                </Form.Group>
+                <Form.Group controlId="exampleForm.ControlRadio">
+                    <Form.Label>Выберите цвет</Form.Label>
+                    <div>
+                        <Form.Check
+                            type="radio"
+                            inline
+                            label={<div className="radio-circle radio-blue"></div>}
+                            name="color"
+                            id="color-blue"
+                        />
+                        <Form.Check
+                            type="radio"
+                            inline
+                            label={<div className="radio-circle radio-green"></div>}
+                            name="color"
+                            id="color-green"
+                        />
+                        <Form.Check
+                            type="radio"
+                            inline
+                            label={<div className="radio-circle radio-red"></div>}
+                            name="color"
+                            id="color-red"
+                        />
+                    </div>
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
