@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import './needhelp_styles.css';
-import u_here from './u_here.png';
+import u_here from './icons/u_here.png';
 import L from 'leaflet';
 
 function EventMapListener({ onLocationFound }) {
@@ -75,45 +75,35 @@ export default function NeedHelp() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Создайте объект JSON из данных маркера и полей ввода
+        if (!formData.name) {
+            alert('Введите ваше имя!');
+            return;
+        }
+        if (!formData.phone) {
+            alert('Введите номер телефона!');
+            return;
+        }
+        if (!markerPosition) {
+            alert('Укажите ваше местоположение!');
+            return;
+        }
         const jsonData = {
             markerPosition,
             formData,
         };
-
-        // Получите текущие события из локального хранилища (если они есть)
         const existingEvents = JSON.parse(localStorage.getItem('events')) || {};
-
-        // Обновите текущие события новыми данными
         const updatedEvents = {
             ...existingEvents,
             events: {
                 ...existingEvents.events,
-                [Date.now()]: jsonData, // Используйте метку времени как уникальный идентификатор
+                [Date.now()]: jsonData,
             },
         };
-
-        // Сохраните обновленные события в локальное хранилище
         localStorage.setItem('events', JSON.stringify(updatedEvents));
-
-        // Очистите форму или выполните другие действия после успешной отправки
         setMarkerPosition(null);
-        setFormData({
-            name: '',
-            phone: '',
-            transportType: 'Грузовой транспорт',
-            severity: 'color-blue',
-            description: '',
-        });
-
-        // Переход на другую страницу после успешной отправки
         navigate('/events');
-
-        // Проверьте, что данные успешно сохранены
         console.log('Updated Events:', updatedEvents);
     };
-
     return (
         <div>
             <div>

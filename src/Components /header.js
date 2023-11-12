@@ -4,7 +4,7 @@ import NeedHelp from "./NeedHelp";
 import Page3 from "./page3";
 import Events from "./Events";
 import {Container, Nav, Navbar} from "react-bootstrap";
-import logo from './logo.png'
+import logo from './icons/logo.png'
 
 class Header extends Component {
     render() {
