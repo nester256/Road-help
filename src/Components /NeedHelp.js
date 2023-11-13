@@ -105,7 +105,7 @@ export default function NeedHelp() {
         console.log('Updated Events:', updatedEvents);
     };
     return (
-        <div>
+        <>
             <div>
                 <MapContainer center={userLocation || [43.4040000, 39.9540000]} zoom={13} style={{ width: '100%', height: '400px' }}>
                     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
@@ -205,6 +205,6 @@ export default function NeedHelp() {
                     Отправить
                 </Button>
             </Form>
-        </div>
+        </>
     );
 }
