@@ -1,0 +1,72 @@
+.main-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.welcome-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 70px;
+    width: 80%;
+}
+
+.first-text {
+    font-size: 30px;
+}
+
+.welcome-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.welcome-text-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 50px;
+    width: 80%;
+}
+
+.welcome-text-items-first {
+    border-radius: 30px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid gray;
+}
+
+.welcome-text-items {
+    background: linear-gradient(90deg, rgb(100 185 100 / 88%) 0%, rgb(85 124 85 / 73%) 100%);
+    border-radius: 30px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    color: white;
+}
+
+.welcome-text-advantages {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 80%;
+    gap: 25px;
+}
+
+.button-help {
+    background-color: #EC8F5E;
+}
+
+.button-helper {
+    background-color: #F3B664;
+}

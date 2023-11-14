@@ -1,0 +1,32 @@
+.events-list-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.events-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.event {
+    background-color: #557c552e;
+    border-radius: 30px;
+    padding: 15px;
+    width: 80%;
+    margin-top: 15px;
+}
+
+.selected-event {
+    background-color: #557c556e;
+}
+
+.event-text {
+    font-size: 16px;
+    margin: 7px;
+}

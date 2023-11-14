@@ -1,0 +1,86 @@
+.button {
+    margin-top: 15px;
+    background-color: #557C55;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px 25px;
+    border-radius: 20px;
+    outline: none;
+    border: 0;
+    text-align: center;
+}
+
+.button-container {
+    width: 100%;
+    text-align: center;
+}
+
+.form-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 35%;
+    border: 1px solid gray;
+    padding: 40px;
+    border-radius: 30px;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-input {
+    height: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    outline: none;
+    padding: 5px 15px;
+}
+
+.form-input-textarea {
+    min-height: 100px;
+    max-height: 300px;
+    padding-top: 15px;
+}
+
+.form-input-select {
+    background-color: white;
+    cursor: pointer;
+}
+
+.radio-item {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.radio-circle {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.radio-blue {
+    accent-color: #3498db;
+}
+
+.radio-green {
+    accent-color: #229d56;
+}
+
+.radio-red {
+    accent-color: #e74c3c;
+}
